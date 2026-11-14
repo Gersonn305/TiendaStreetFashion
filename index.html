@@ -101,7 +101,7 @@ $("#app").innerHTML=term?list():view=="tatuajes"?tattoo():view=="home"?hero()+ti
 function go(v){view=v;term="";sub="Todos";$("#q").value="";render();scrollTo(0,0)}
 function toast(t){const e=$("#toast");e.textContent=t;e.classList.add("on");clearTimeout(toast.h);toast.h=setTimeout(()=>e.classList.remove("on"),2200)}
 function pan(id,on){["#drawer","#sheet","#help","#pay"].forEach(s=>$(s).classList.remove("on"));if(on)$(id).classList.add("on");$("#sh").classList.toggle("on",!!on)}
-const MAKE_HOOK="PEGAR_URL_WEBHOOK_MAKE",MAKE_TOKEN="CAMBIA_ESTE_TOKEN",STOCK={};
+const MAKE_HOOK="https://hook.us2.make.com/ssquv5avz9pppx18exmnn1okrd2fedj8",MAKE_TOKEN="JEMETO1407",STOCK={};
 fetch("stock.json?t="+Math.floor(Date.now()/60000)).then(r=>r.json()).then(j=>{Object.assign(STOCK,j);render()}).catch(()=>{});
 const soldOut=id=>STOCK[id]!==undefined&&STOCK[id]<=0;
 function sendOrder(){if(!cart.length||MAKE_HOOK.startsWith("PEGAR"))return;const items=cart.map(i=>({id:i.id,qty:i.q}));fetch(MAKE_HOOK,{method:"POST",mode:"no-cors",headers:{"Content-Type":"application/x-www-form-urlencoded"},body:new URLSearchParams({order_id:"W"+Date.now(),items_json:JSON.stringify(items),token:MAKE_TOKEN})}).catch(()=>{})}
